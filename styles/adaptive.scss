@@ -1,0 +1,275 @@
+@media (min-width: 1275px) {
+  .btn {
+    width: 196px;
+    height: 43px;
+    background-color: $green;
+    border-radius: 50px;
+    color: $white;
+    font-size: 14px;
+    transition: 0.3s;
+    user-select: none;
+    &:hover {
+      background-color: $lightGreen;
+    }
+  }
+  .header {
+    width: 80%;
+    height: 67px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    &__button {
+      margin-left: 58px;
+    }
+    &__menu {
+      display: none;
+    }
+    &-leftBlock {
+      display: flex;
+      align-items: center;
+    }
+    &-rightBlock {
+      display: flex;
+      align-items: center;
+    }
+    &__logo {
+      width: 91px;
+      height: 27px;
+      margin-right: 23px;
+    }
+    &-address {
+      display: flex;
+      flex-direction: column;
+      &-cityBlock {
+        display: flex;
+        align-items: center;
+        img {
+          margin-right: 6.65px;
+        }
+        p {
+          color: $dark;
+        }
+      }
+      &__street {
+        color: $gray;
+        align-self: flex-end;
+      }
+      &__text {
+        font-size: 14px;
+      }
+    }
+
+    &-phoneBlock {
+      display: flex;
+      align-items: center;
+      p {
+        font-size: 16px;
+        color: $dark;
+        margin-left: 11.33px;
+      }
+    }
+  }
+
+  .routes {
+    background-color: $green;
+    &-list {
+      display: flex;
+      align-items: center;
+      height: 43px;
+      margin-left: 10%;
+      &__item {
+        margin-left: 30px;
+        cursor: pointer;
+        &:first-child {
+          margin: 0;
+        }
+      }
+      &__link {
+        color: $white;
+      }
+    }
+  }
+
+  .main {
+    display: flex;
+    &-leftBlock {
+      width: 50%;
+      background-color: $lightGray;
+      height: 533px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-right: 213px;
+    }
+    &-textBlock {
+      width: 367px;
+      align-self: flex-end;
+      &__title {
+        font-size: 36px;
+      }
+      &__text {
+        font-size: 16px;
+      }
+    }
+    &-rightBlock {
+      width: 50%;
+      height: 533px;
+      background: url('assets/img/mainImg.jpg') 0 0 / cover no-repeat;
+    }
+  }
+
+  .sliderBlock {
+    &-slider {
+      width: 1140px;
+      margin: 100px auto;
+      animation-name: fade;
+      animation-duration: 1.5s;
+      &-arrowBlock {
+        width: 169px;
+        margin: 0 auto;
+        margin-top: 39px;
+        display: flex;
+        align-items: center;
+        &-counterBlock {
+          margin: 0 36px;
+          display: flex;
+          user-select: none;
+          &__items {
+            color: $counter;
+          }
+        }
+        &__rightArrow {
+          transform: rotate(180deg);
+          cursor: pointer;
+          width: 34px;
+          height: 34px;
+        }
+        &__leftArrow {
+          cursor: pointer;
+          width: 34px;
+          height: 34px;
+        }
+      }
+      &-sliderItem {
+        animation-name: fade;
+        animation-duration: 1.5s;
+        height: 440px;
+        border-radius: 5px;
+        position: relative;
+        &-imageBlock {
+          position: absolute;
+          z-index: -1;
+          height: 100%;
+          top: 0;
+          right: 0;
+          user-select: none;
+          &__image {
+            height: 100%;
+          }
+        }
+        &-textBlock {
+          padding-left: 4rem;
+          padding-top: 53.14px;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(
+            80deg,
+            $lightGray2 0%,
+            $lightGray2 50%,
+            #00000000 50%,
+            #00000000 100%
+          );
+          &-btnsBlock {
+            display: flex;
+            margin-top: 27px;
+            &__secondBtn {
+              margin-left: 14px;
+              background-color: #00000000;
+              color: $green;
+              border: 1px solid $green;
+              &:hover {
+                background-color: $green;
+                color: $white;
+              }
+            }
+          }
+          &__title {
+            font-size: 38px;
+            font-weight: 700;
+            text-transform: uppercase;
+          }
+          &__subtitle {
+            font-size: 22px;
+            font-weight: 700;
+          }
+          &-priceBlock {
+            margin-top: 33px;
+            display: flex;
+            align-items: center;
+            &__price {
+              font-size: 20px;
+              margin-right: 16px;
+            }
+            &__oldPrice {
+              font-size: 16px;
+              color: $gray;
+              text-decoration: line-through;
+            }
+          }
+
+          &__description {
+            margin-top: 16px;
+            height: 108px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-left: 14px;
+            li {
+              list-style-type: disc;
+              font-size: 16px;
+            }
+            li::marker {
+              color: $green;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .footer {
+    background-color: $green;
+    &-content {
+      width: 80%;
+      height: 144px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      &-list {
+        display: flex;
+        justify-content: space-between;
+        &__item {
+          margin-left: 30px;
+          color: $white;
+          cursor: pointer;
+          &:first-child {
+            margin: 0;
+          }
+        }
+      }
+      &-contacts {
+        &__item {
+          width: 35px;
+          height: 35px;
+          margin-left: 15px;
+          cursor: pointer;
+          &:first-child {
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+}
