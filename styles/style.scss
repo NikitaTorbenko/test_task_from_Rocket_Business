@@ -3,11 +3,12 @@
 
 @font-face {
   font-family: 'SansCaption';
-  src: url('assets/fonts/PT_Sans-Caption-Web-Regular.ttf');
+  src: url('../public/assets/fonts/PT_Sans-Caption-Web-Regular.ttf');
 }
 
 body {
   font-family: SansCaption;
+  user-select: none;
 }
 
 @keyframes fade {
@@ -169,7 +170,8 @@ body {
   &-rightBlock {
     width: 100%;
     height: 288px;
-    background: url('assets/img/mainImg.jpg') 0 0 / cover no-repeat;
+    background: url('../public/assets/img/mainImg.jpg') 0 0 / cover no-repeat;
+    // background: url('assets/img/mainImg.jpg') 0 0 / cover no-repeat;
   }
 }
 

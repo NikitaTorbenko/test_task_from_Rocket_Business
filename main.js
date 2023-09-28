@@ -1,253 +1,109 @@
-import './styles/style.scss';
-import { Slides } from './sliderCounter';
-import { menuFunc } from './menu';
+const arrow = fill => {
+  return `<svg width="34" height="34" viewBox="0 0 34 34" fill=${fill} xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#clip0_13403_104)">
+  <path d="M32.6718 15.6719H4.54493L9.20426 11.0351C9.72416 10.5177 9.72615 9.67678 9.20871 9.15689C8.69127 8.63693 7.8503 8.635 7.33041 9.15237L0.390691 16.0586C0.390226 16.059 0.389894 16.0595 0.389496 16.0599C-0.129071 16.5773 -0.130731 17.4209 0.389363 17.9401C0.389828 17.9405 0.39016 17.941 0.390558 17.9414L7.33028 24.8476C7.85011 25.3649 8.69107 25.3631 9.20858 24.8431C9.72602 24.3232 9.72402 23.4823 9.20413 22.9648L4.54493 18.3281H32.6718C33.4054 18.3281 34 17.7335 34 17C34 16.2665 33.4054 15.6719 32.6718 15.6719Z" fill=${fill}/>
+  </g>
+  <defs>
+  <clipPath id="clip0_13403_104">
+  <rect width="34" height="34" fill="white"/>
+  </clipPath>
+  </defs>
+  </svg>`;
+};
+const Slides = () => {
+  const nextBtn = document.querySelector('#nextBtn');
+  const prevBtn = document.querySelector('#prevBtn');
+  const slides = document.querySelectorAll('#sliderItem');
 
-document.querySelector('#app').innerHTML = `
-  <header class="header">
-    <div class='header-logoBlock'>
-      <button class="header__menu" id='menu'></button>
-      <img src="/assets/img/LOGO.svg" alt="logo" class="header__logo" />
-    </div>
-    <div class='header-content'>
-    <div class="header-leftBlock">
-      <div class="header-address">
-        <div class="header-address-cityBlock">
-          <img
-            src="/assets/img/addressPoint.svg"
-            alt=""
-            class="address__point"
-          />
-          <p class="address__text">Ростов-на-Дону</p>
-        </div>
-        <p class="address__text header-address__street">ул. Ленина, 2Б</p>
-      </div>
-    </div>
-    <div class="header-rightBlock">
-      <div class="header-phoneBlock">
-        <img alt="" src="/assets/img/whatsapp.svg" />
-        <p>+7(863) 000 00 00</p>
-      </div>
-      <button id="openPopup" class="header__button btn">Записаться на прием</button>
-    </div>
-    </div>
-    
-  </header>
-  <div class="routes" id='menuContent'>
-    <ul class="routes-list">
-      <li class="routes-list__item">
-        <a class="routes-list__link">О клинике</a>
-      </li>
-      <li class="routes-list__item">
-        <a class="routes-list__link">Услуги</a>
-      </li>
-      <li class="routes-list__item">
-        <a class="routes-list__link">Специалисты</a>
-      </li>
-      <li class="routes-list__item">
-        <a class="routes-list__link">Цены</a>
-      </li>
-      <li class="routes-list__item">
-        <a class="routes-list__link">Контакты</a>
-      </li>
-    </ul>
-    <button id="openPopupBurger" class='routes__button btn'>Записаться на прием</button>
-  </div>
-  <div class="main">
-    <div class="main-leftBlock">
-      <div class="main-textBlock">
-        <h3 class="main-textBlock__title">
-          Многопрофильная клиника для детей и взрослых
-        </h3>
-        <p class="main-textBlock__text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua
-        </p>
-      </div>
-    </div>
-    <div class="main-rightBlock"></div>
-  </div>
-  <div class="sliderBlock">
-    <div class="sliderBlock-slider">
-      <div class="sliderBlock-slider-sliderItem" id='sliderItem'>
-      <div class="sliderBlock-slider-sliderItem-imageBlock">
-          <img src='assets/img/sliderImg.jpg' alt='' class="sliderBlock-slider-sliderItem-imageBlock__image"/>
-        </div>
-        <div class="sliderBlock-slider-sliderItem-textBlock">
-          <p class="sliderBlock-slider-sliderItem-textBlock__title">Check-UP</p>
-          <p class="sliderBlock-slider-sliderItem-textBlock__subtitle">
-            для мужчин
-          </p>
-          <ul class="sliderBlock-slider-sliderItem-textBlock__description">
-            <li>Гормональный скрининг</li>
-            <li>Тестостерон</li>
-            <li>Свободный тестостерон</li>
-            <li>Глобулин, связывающий половые гормоны</li>
-          </ul>
-          <div class="sliderBlock-slider-sliderItem-textBlock-priceBlock">
-            <p class="sliderBlock-slider-sliderItem-textBlock-priceBlock__price">
-              Всего 2800₽
-            </p>
-            <p class="sliderBlock-slider-sliderItem-textBlock-priceBlock__oldPrice">
-              3500₽
-            </p>
-          </div>
-          <div class="sliderBlock-slider-sliderItem-textBlock-btnsBlock">
-            <button class="sliderBlock-slider-sliderItem-textBlock-btnsBlock__firstBtn btn">Записаться</button>
-            <button class="sliderBlock-slider-sliderItem-textBlock-btnsBlock__secondBtn btn">Подробнее</button>
-          </div>
-        </div>
-        
-      </div>
+  nextBtn.addEventListener('click', () => nextSlide());
+  prevBtn.addEventListener('click', () => prevSlide());
+  const showSlide = n => {
+    const slides = document.querySelectorAll('#sliderItem');
+    const counter = document.querySelector('#counter');
+    const items = document.querySelector('#items');
+    if (n > slides.length) {
+      slideIndex = 1;
+    }
+    if (n < 1) {
+      slideIndex = slides.length;
+    }
 
-      <div class="sliderBlock-slider-sliderItem" id='sliderItem'>
-      <div class="sliderBlock-slider-sliderItem-imageBlock">
-          <img src='assets/img/sliderImg2.jpg' alt='' class="sliderBlock-slider-sliderItem-imageBlock__image"/>
-        </div>
-        <div class="sliderBlock-slider-sliderItem-textBlock">
-          <p class="sliderBlock-slider-sliderItem-textBlock__title">Check-UP</p>
-          <p class="sliderBlock-slider-sliderItem-textBlock__subtitle">
-            для женщин
-          </p>
-          <ul class="sliderBlock-slider-sliderItem-textBlock__description">
-            <li>Гормональный скрининг для женщин</li>
-            <li>Тестостерон (этого у женщин мало)</li>
-            <li>Свободный тестостерон (этого тоже мало)</li>
-            <li>Глобулин, связывающий половые гормоны</li>
-          </ul>
-          <div class="sliderBlock-slider-sliderItem-textBlock-priceBlock">
-            <p class="sliderBlock-slider-sliderItem-textBlock-priceBlock__price">
-              Всего 3000₽
-            </p>
-            <p class="sliderBlock-slider-sliderItem-textBlock-priceBlock__oldPrice">
-              3500₽
-            </p>
-          </div>
-          <div class="sliderBlock-slider-sliderItem-textBlock-btnsBlock">
-            <button class="sliderBlock-slider-sliderItem-textBlock-btnsBlock__firstBtn btn">Записаться</button>
-            <button class="sliderBlock-slider-sliderItem-textBlock-btnsBlock__secondBtn btn">Подробнее</button>
-          </div>
-        </div>
-        
-      </div>
+    for (let slide of slides) {
+      slide.style.display = 'none';
+    }
+    if (window.innerWidth > 1270) {
+      slides[slideIndex - 1].style.display = 'block';
+    } else {
+      slides[slideIndex - 1].style.display = 'flex';
+    }
 
-      <div class="sliderBlock-slider-sliderItem" id='sliderItem'>
-      <div class="sliderBlock-slider-sliderItem-imageBlock">
-          <img src='assets/img/sliderImg3.jpg' alt='' class="sliderBlock-slider-sliderItem-imageBlock__image"/>
-        </div>
-        <div class="sliderBlock-slider-sliderItem-textBlock">
-          <p class="sliderBlock-slider-sliderItem-textBlock__title">Check-UP</p>
-          <p class="sliderBlock-slider-sliderItem-textBlock__subtitle">
-            для детей
-          </p>
-          <ul class="sliderBlock-slider-sliderItem-textBlock__description">
-            <li>Что-то для детей</li>
-            <li>Тестостерон (только детский)</li>
-            <li>Свободный и детский тестостерон</li>
-            <li>Гематоген</li>
-          </ul>
-          <div class="sliderBlock-slider-sliderItem-textBlock-priceBlock">
-            <p class="sliderBlock-slider-sliderItem-textBlock-priceBlock__price">
-              Всего 5000₽
-            </p>
-            <p class="sliderBlock-slider-sliderItem-textBlock-priceBlock__oldPrice">
-              7000₽
-            </p>
-          </div>
-          <div class="sliderBlock-slider-sliderItem-textBlock-btnsBlock">
-            <button class="sliderBlock-slider-sliderItem-textBlock-btnsBlock__firstBtn btn">Записаться</button>
-            <button class="sliderBlock-slider-sliderItem-textBlock-btnsBlock__secondBtn btn">Подробнее</button>
-          </div>
-        </div>
-        
-      </div>
+    counter.innerHTML = `${slideIndex}`;
+    items.innerHTML = `/${slides.length}`;
+    prevBtn.innerHTML = arrow('#0DBC91');
+    nextBtn.innerHTML = arrow('#0DBC91');
+    if (slideIndex === 1) {
+      prevBtn.innerHTML = arrow('#E1E1E1');
+      nextBtn.innerHTML = arrow('#0DBC91');
+    } else if (slideIndex === slides.length) {
+      prevBtn.innerHTML = arrow('#0DBC91');
+      nextBtn.innerHTML = arrow('#E1E1E1');
+    }
+  };
 
-      <div class="sliderBlock-slider-sliderItem" id='sliderItem'>
-      <div class="sliderBlock-slider-sliderItem-imageBlock">
-          <img src='/assets/img/sliderImg4.jpg' alt='' class="sliderBlock-slider-sliderItem-imageBlock__image"/>
-        </div>
-        <div class="sliderBlock-slider-sliderItem-textBlock">
-          <p class="sliderBlock-slider-sliderItem-textBlock__title">Check-UP</p>
-          <p class="sliderBlock-slider-sliderItem-textBlock__subtitle">
-            для пожилых
-          </p>
-          <ul class="sliderBlock-slider-sliderItem-textBlock__description">
-            <li>Гормональный скрининг уже не поможет</li>
-            <li>Тестостерон иссекает</li>
-            <li>Уже не свободный тестостерон</li>
-            <li>Глобулин, когда-то связывающий половые гормоны</li>
-          </ul>
-          <div class="sliderBlock-slider-sliderItem-textBlock-priceBlock">
-            <p class="sliderBlock-slider-sliderItem-textBlock-priceBlock__price">
-              Всего 1000₽
-            </p>
-            <p class="sliderBlock-slider-sliderItem-textBlock-priceBlock__oldPrice">
-              3000₽
-            </p>
-          </div>
-          <div class="sliderBlock-slider-sliderItem-textBlock-btnsBlock">
-            <button class="sliderBlock-slider-sliderItem-textBlock-btnsBlock__firstBtn btn">Записаться</button>
-            <button class="sliderBlock-slider-sliderItem-textBlock-btnsBlock__secondBtn btn">Подробнее</button>
-          </div>
-        </div>
-        
-      </div>
+  let slideIndex = 1;
 
-      
-  </div>
-  <div class='sliderBlock-slider-arrowBlock'>
-          <div class='sliderBlock-slider-arrowBlock__leftArrow' id='prevBtn'></div>
-          <div class="sliderBlock-slider-arrowBlock-counterBlock">
-            <p class="sliderBlock-slider-arrowBlock-counterBlock__counter" id='counter'></p>
-            <p class="sliderBlock-slider-arrowBlock-counterBlock__items" id='items'></p>
-          </div>
-          <div class='sliderBlock-slider-arrowBlock__rightArrow' id='nextBtn'></div>
-        </div>
-    </div>
-  </div>
-  <footer class='footer'>
-    <div class='footer-content'>
-        <img src="/assets/img/logoFooter.svg" alt="logo" class="footer-content__logo" />
-        <ul class="footer-content-list">
-          <li class="footer-content-list__item">
-            <a class="footer-content-list__link">О клинике</a>
-          </li>
-          <li class="footer-content-list__item">
-            <a class="footer-content-list__link">Услуги</a>
-          </li>
-          <li class="footer-content-list__item">
-            <a class="footer-content-list__link">Специалисты</a>
-          </li>
-          <li class="footer-content-list__item">
-            <a class="footer-content-list__link">Цены</a>
-          </li>
-          <li class="footer-content-list__item">
-            <a class="footer-content-list__link">Контакты</a>
-          </li>
-        </ul>
-    
-      <div class='footer-content-contacts'>
-      <img src='assets/img/instagram.png' alt='' class='footer-content-contacts__item' />
-      <img src='assets/img/whatsapp.png' alt='' class='footer-content-contacts__item' />
-      <img src='assets/img/telegram.png' alt='' class='footer-content-contacts__item' />
-    </div>
-    </div>
-  </footer>
+  showSlide(slideIndex);
 
-  <div class="popup" id="popup">
-    <div class="popup-content">
-        <span class="close" id="closePopup">&times;</span>
-        <form id="emailForm">
-            <label for="name">Имя:</label><br>
-            <input type="text" id="name" name="name"><br>
-            <label for="body">Сообщение:</label><br>
-            <textarea class="popup-body" id="body" name="body"></textarea><br><br>
-            <input type="submit" value="Отправить">
-        </form>
-    </div>
-  </div>
-  `;
+  const nextSlide = () => {
+    slideIndex !== slides.length && showSlide((slideIndex += 1));
+  };
+  const prevSlide = () => {
+    slideIndex !== 1 && showSlide((slideIndex -= 1));
+  };
+};
+const menuFunc = () => {
+  const menu = document.querySelector('#menu');
+  const menuContent = document.querySelector('#menuContent');
+  const routesBtn = document.querySelector('.routes__button');
+  const routesList = document.querySelector('.routes-list');
+  let isOpen = false;
 
-// Определение функции togglePopup и обработчика события для кнопки
+  menu.innerHTML = `<svg width="37" height="26" viewBox="0 0 37 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="37" height="4" fill="#1FA181"/>
+      <rect y="11" width="37" height="4" fill="#1FA181"/>
+      <rect y="22" width="37" height="4" fill="#1FA181"/>
+      </svg>`;
+
+  menu.addEventListener('click', e => {
+    isOpen = !isOpen;
+
+    if (isOpen) {
+      menu.innerHTML = `<svg width="29" height="30" viewBox="0 0 29 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect y="27.1628" width="37" height="4" transform="rotate(-45 0 27.1628)" fill="#1FA181"/>
+      <rect x="2.83276" y="0.504395" width="37" height="4" transform="rotate(45 2.83276 0.504395)" fill="#1FA181"/>
+      </svg>`;
+
+      if (window.innerWidth < 1270) {
+        setTimeout(() => (routesBtn.style.display = 'block'), 50);
+        routesList.style.display = 'block';
+        menuContent.style.height = '100vh';
+        menuContent.style.paddingTop = '48px';
+      }
+    } else {
+      menu.innerHTML = `<svg width="37" height="26" viewBox="0 0 37 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="37" height="4" fill="#1FA181"/>
+      <rect y="11" width="37" height="4" fill="#1FA181"/>
+      <rect y="22" width="37" height="4" fill="#1FA181"/>
+      </svg>`;
+      if (window.innerWidth < 1270) {
+        setTimeout(() => (routesBtn.style.display = 'none'), 200);
+        menuContent.style.height = '0vh';
+        menuContent.style.paddingTop = '0';
+        setTimeout(() => (routesList.style.display = 'none'), 350);
+      }
+    }
+  });
+};
 function togglePopup() {
   const popup = document.getElementById('popup');
   popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
@@ -259,7 +115,6 @@ document
   .getElementById('openPopupBurger')
   .addEventListener('click', togglePopup);
 
-// Обработчик события для формы
 document
   .getElementById('emailForm')
   .addEventListener('submit', function (event) {

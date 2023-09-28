@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 @media (min-width: 1275px) {
   .btn {
     width: 196px;
@@ -115,7 +117,7 @@
     &-rightBlock {
       width: 50%;
       height: 533px;
-      background: url('assets/img/mainImg.jpg') 0 0 / cover no-repeat;
+      background: url('../public/assets/img/mainImg.jpg') 0 0 / cover no-repeat;
     }
   }
 

@@ -1,8 +1,8 @@
 export const menuFunc = () => {
-  const menu = document.querySelector("#menu");
-  const menuContent = document.querySelector("#menuContent");
+  const menu = document.querySelector('#menu');
+  const menuContent = document.querySelector('#menuContent');
   const routesBtn = document.querySelector('.routes__button');
-  const routesList = document.querySelector('.routes-list')
+  const routesList = document.querySelector('.routes-list');
   let isOpen = false;
 
   menu.innerHTML = `<svg width="37" height="26" viewBox="0 0 37 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -11,7 +11,7 @@ export const menuFunc = () => {
       <rect y="22" width="37" height="4" fill="#1FA181"/>
       </svg>`;
 
-  menu.addEventListener("click", (e) => {
+  menu.addEventListener('click', e => {
     isOpen = !isOpen;
 
     if (isOpen) {
@@ -21,10 +21,10 @@ export const menuFunc = () => {
       </svg>`;
 
       if (window.innerWidth < 1270) {
-        setTimeout(() => routesBtn.style.display = 'block', 50)
-        routesList.style.display='block'
-        menuContent.style.height = '100vh'
-        menuContent.style.paddingTop = '48px'
+        setTimeout(() => (routesBtn.style.display = 'block'), 50);
+        routesList.style.display = 'block';
+        menuContent.style.height = '100vh';
+        menuContent.style.paddingTop = '48px';
       }
     } else {
       menu.innerHTML = `<svg width="37" height="26" viewBox="0 0 37 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,13 +33,11 @@ export const menuFunc = () => {
       <rect y="22" width="37" height="4" fill="#1FA181"/>
       </svg>`;
       if (window.innerWidth < 1270) {
-        setTimeout(() => routesBtn.style.display = 'none', 200)
-        menuContent.style.height = '0vh'
-        menuContent.style.paddingTop = '0'
-        setTimeout(() => routesList.style.display='none', 350)
-        
+        setTimeout(() => (routesBtn.style.display = 'none'), 200);
+        menuContent.style.height = '0vh';
+        menuContent.style.paddingTop = '0';
+        setTimeout(() => (routesList.style.display = 'none'), 350);
       }
-      
     }
   });
 };
